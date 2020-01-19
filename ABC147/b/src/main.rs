@@ -61,13 +61,16 @@ macro_rules! read_value {
 
 fn main() {
     input! {
-        s: String
+        cs: chars
     }
-    let result = match &*s {
-        "Sunny" => "Cloudy",
-        "Cloudy" => "Rainy",
-        "Rainy" => "Sunny",
-        _ => "",
-    };
-    println!("{}", result);
+    let len = cs.len() / 2;
+    let cs2 = cs.clone().into_iter().rev().collect::<Vec<char>>();
+    let mut cnt = 0;
+    for i in 0..len {
+        if cs[i] != cs2[i] {
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt);
 }

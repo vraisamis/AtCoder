@@ -61,13 +61,15 @@ macro_rules! read_value {
 
 fn main() {
     input! {
-        s: String
+        a1: u64,
+        a2: u64,
+        a3: u64,
     }
-    let result = match &*s {
-        "Sunny" => "Cloudy",
-        "Cloudy" => "Rainy",
-        "Rainy" => "Sunny",
-        _ => "",
+
+    let result = if a1 + a2 + a3 >= 22 {
+        "bust"
+    } else {
+        "win"
     };
     println!("{}", result);
 }

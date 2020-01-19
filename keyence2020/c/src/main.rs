@@ -1,3 +1,6 @@
+#[allow(unused_imports)]
+use std::cmp::{min, max};
+
 #[allow(dead_code)]
 macro_rules! input {
     (source = $s:expr, $($r:tt)*) => {
@@ -61,13 +64,19 @@ macro_rules! read_value {
 
 fn main() {
     input! {
-        s: String
+        n: usize,
+        k: usize,
+        s: usize
     }
-    let result = match &*s {
-        "Sunny" => "Cloudy",
-        "Cloudy" => "Rainy",
-        "Rainy" => "Sunny",
-        _ => "",
-    };
-    println!("{}", result);
+
+    let mut v1 = vec![s; k];
+    let mut v2 = vec![max((s + 1) % 1_000_000_000, 1); n - k];
+    v1.append(&mut v2);
+
+    print!("{}", v1[0]);
+    for v in v1.into_iter().skip(1) {
+        print!(" {}", v);
+    }
+    println!("");
 }
+

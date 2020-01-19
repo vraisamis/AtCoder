@@ -1,3 +1,4 @@
+
 #[allow(dead_code)]
 macro_rules! input {
     (source = $s:expr, $($r:tt)*) => {
@@ -61,13 +62,21 @@ macro_rules! read_value {
 
 fn main() {
     input! {
-        s: String
+        n:usize,
+        xx: [(isize, isize); n],
     }
-    let result = match &*s {
-        "Sunny" => "Cloudy",
-        "Cloudy" => "Rainy",
-        "Rainy" => "Sunny",
-        _ => "",
-    };
-    println!("{}", result);
+    // (start, end)
+    let mut xx = xx.into_iter().map(|(x, l)| (x - (l - 1), x + (l + 1))).collect::<Vec<(isize, isize)>>();
+    xx.sort_by(|&(_, lend), &(_, rend)| lend.cmp(&rend));
+
+    let mut last = -1_000_000_001;
+    let mut cnt = 0;
+    for (s, e) in xx {
+        if last <= s {
+            cnt += 1;
+            last = e;
+        }
+    }
+
+    println!("{}", cnt);
 }

@@ -1,3 +1,6 @@
+#[allow(unused_imports)]
+use std::cmp::{min, max};
+
 #[allow(dead_code)]
 macro_rules! input {
     (source = $s:expr, $($r:tt)*) => {
@@ -61,13 +64,12 @@ macro_rules! read_value {
 
 fn main() {
     input! {
-        s: String
+        h: usize,
+        w: usize,
+        n: usize
     }
-    let result = match &*s {
-        "Sunny" => "Cloudy",
-        "Cloudy" => "Rainy",
-        "Rainy" => "Sunny",
-        _ => "",
-    };
-    println!("{}", result);
+    let m = max(h, w);
+    let k = n / m;
+    let k1 = if n % m == 0 { 0 } else { 1 };
+    println!("{}", k + k1);
 }

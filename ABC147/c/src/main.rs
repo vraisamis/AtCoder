@@ -61,13 +61,31 @@ macro_rules! read_value {
 
 fn main() {
     input! {
-        s: String
+        n: usize,
     }
-    let result = match &*s {
-        "Sunny" => "Cloudy",
-        "Cloudy" => "Rainy",
-        "Rainy" => "Sunny",
-        _ => "",
-    };
-    println!("{}", result);
+    let mut says = vec![];
+    let mut u = vec![None; n];
+    for _ in 0..n {
+        input! {
+            k: usize,
+            say: [(usize1, u8); k]
+        }
+        let mut v = vec![None; n];
+        for (i, truth) in say {
+            v[i] = Some(truth);
+        }
+        says.push(v);
+    }
+
+    let result = solve(&says, &mut u);
+
+}
+
+fn solve(tbl: &Vec<Vec<Option<u8>>>, truth: &mut Vec<Option<usize>>) -> usize {
+    let n = truth.len();
+    for i in 0..n {
+        if truth[i].is_none() {
+            let mut v = vec![None; truth.len()];
+        }
+    }
 }
